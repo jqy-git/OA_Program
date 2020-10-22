@@ -26,7 +26,8 @@
 
 
 
-    <div class="body">
+    <div style="with:1200px;backgroundColor:rgb(234,238,240);">
+        <div class="body">
         <div class="body-left">
             <div class="body-left-one">
                 <div class="body-left-one-left">
@@ -72,6 +73,8 @@
         <div class="body-right"></div>
     </div>
   </div>
+    </div>
+    
 </template>
 
 <script>
@@ -189,12 +192,13 @@ export default {
 
 <style lang="less">
 .head{
-    padding: 0 10% 0 10%;
+    // padding: 0 10% 0 10%;
     // background-color: skyblue;
-    // width: 80%;
+    width: 1200px;
+    height: 85px;
     margin: 0 auto 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     &-one{
         font-size: 25px;
         margin: 20px 0 0 0;
@@ -219,8 +223,10 @@ export default {
     }
 }
 .body{
-    padding: 20px 10% 20px 10%;
-    background-color: skyblue;
+    padding: 20px 0 20px 0;
+    margin: 0 auto 0 auto;
+    width: 1200px;
+    // background-color: skyblue;
     &-left{
         border-radius: 10px;
         background-color: white;
@@ -260,7 +266,7 @@ export default {
                 text-align: center;
                 padding: 20px 0 20px 0;
                 &-img{
-                    transform: translate(0,2px);
+                    transform: translate(0,4px);
                 }
             }
         }
