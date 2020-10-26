@@ -11,7 +11,11 @@
         <button>搜索</button>
       </div>
       <div class="head-three"></div>
-      <div class="head-four" v-for="(item,index) in departmentList" :key="index">
+      <div
+        class="head-four"
+        v-for="(item, index) in departmentList"
+        :key="index"
+      >
         <div class="head-four-welcome">
           欢迎您，（{{ item.department }}）{{ item.name }}
         </div>
@@ -24,18 +28,18 @@
       </div>
     </div>
 
-    <div style="with: 1200px; backgroundcolor: rgb(234, 238, 240)">
+    <div style="backgroundColor: rgb(234, 238, 240)">
       <div class="body">
-        <div class="body-left" v-for="(item,index) in departmentList" :key="index">
+        <div
+          class="body-left"
+          v-for="(item, index) in departmentList"
+          :key="index"
+        >
           <div class="body-left-one">
             <div class="body-left-one-left">
               <img :src="touxiang" alt="" />
             </div>
-            <div
-              class="body-left-one-right"
-              
-              
-            >
+            <div class="body-left-one-right">
               <div class="body-left-one-right-up">{{ item.name }}</div>
               <div class="body-left-one-right-down">{{ item.englishName }}</div>
             </div>
@@ -55,7 +59,7 @@
             v-for="(item, index) in tabList"
             :key="index"
           >
-            <div class="body-left-three-item">
+            <div class="body-left-three-item" @click="select(index)">
               <img :src="item.url" alt class="body-left-three-item-img" />
               {{ item.name }}
             </div>
@@ -88,7 +92,7 @@
 
         <div class="body-right">
           <div class="body-right-top">
-            <div class="body-right-1">
+            <div class="body-right-1" :class="{ show: conZhuYe }">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -97,20 +101,20 @@
                 </li>
                 <li
                   class="li-body li-body-1"
-                  v-for="(item, index) in gonggaoList"
+                  v-for="(item, index) in gonggaoList.slice(0, 7)"
                   :key="index"
                   :class="{
                     active: checkRed(index),
                     acBorder: checkBorder(index),
                   }"
                 >
-                  <span class="gonggao">{{ item.neirong }}</span>
-                  <span class="shijian">{{ item.shijian }}</span>
+                  <span class="gonggao">{{ item.title }}</span>
+                  <span class="shijian">{{ item.data }}</span>
                 </li>
               </ul>
             </div>
 
-            <div class="body-right-2">
+            <div class="body-right-2" :class="{ show: conZhuYe }">
               <ul>
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -128,7 +132,7 @@
               </ul>
             </div>
 
-            <div class="body-right-3">
+            <div class="body-right-3" :class="{ show: conZhuYe }">
               <ul>
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -149,7 +153,7 @@
           </div>
 
           <div class="body-right-center">
-            <div class="body-right-4">
+            <div class="body-right-4" :class="{ show: conZhuYe }">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -160,17 +164,25 @@
                 <img :src="demo" class="demo" />
                 <div class="wenzhang">
                   <p class="biaoti4">
-                    <img :src="dian" class="redCir" style="transform: translate(0px, -3px);"/> 7张小月请假带待您审批
+                    <img
+                      :src="dian"
+                      class="redCir"
+                      style="transform: translate(0px, -3px)"
+                    />
+                    <!-- 7张小月请假带待您审批 -->
+                    {{ daiban4_1List.title }}
                   </p>
-                  <p>
-                    4月20日，我们迎来了“小猪佩奇“专场生日会，美味 的佩奇蛋糕，
+                  <p class="xiangqing">
+                    {{ daiban4_1List.content }}
+                    <!-- 4月20日，我们迎来了“小猪佩奇“专场生日会，美味 的佩奇蛋糕，
                     精美的专属礼物，特制的生日卡片，给了 小伙伴们带来了一个又
                     一个的惊喜，引来他们一阵阵的 欢呼，社会人，掌声送给豪雅人！
                     “社会人就这么说”的游戏环节，
-                    社会人就这么说，社会人就这么说大家个个都卯足了 劲儿~……
-                    <a href="" class="alabel"> &lt;查看全文&gt; </a>
+                    社会人就这么说，社会人就这么说大家个个都卯足了 劲儿~…… -->
                   </p>
-                  <p class="riqi4">2018-4-23</p>
+                  <a href="" class="alabel"> &lt;查看全文&gt; </a>
+                  <!-- <p class="riqi4">2018-4-23</p> -->
+                  <p class="riqi4">{{ daiban4_1List.data }}</p>
                 </div>
                 <li
                   class="li-body li-body-4"
@@ -186,7 +198,7 @@
               </ul>
             </div>
 
-            <div class="body-right-5">
+            <div class="body-right-5" :class="{ show: conZhuYe }">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -199,32 +211,45 @@
                   <img :src="demo" class="demo" />
                 </div>
 
-                <li class="wenzhang li-5" v-for="(item,index) in wenzhangList" :key="index" 
-                :class="{bor_botm:isAct(index)}"
+                <li
+                  class="wenzhang li-5"
+                  v-for="(item, index) in wenzhangList"
+                  :key="index"
+                  :class="{ bor_botm: isAct(index) }"
                 >
-                  <p class="biaoti5">
-                    <img :src="dian2"/> {{item.title}}
-                  </p>
-                  <p class="zhengwen ">
-                    {{item.neirong}}
+                  <p class="biaoti5"><img :src="dian2" /> {{ item.title }}</p>
+                  <p class="zhengwen">
+                    {{ item.neirong }}
                     <a href="" class="alabel"> &lt;查看全文&gt; </a>
                   </p>
-                  <p class="riqi4">{{item.time}}</p>
+                  <p class="riqi4">{{ item.time }}</p>
                 </li>
               </ul>
             </div>
           </div>
 
+          <grzx :class="{ show: content[0] }"></grzx>
+          <jtzd :class="{ show: content[1] }"></jtzd>
+          <jtgg :class="{ show: content[2] }"></jtgg>
+          <jtrm :class="{ show: content[3] }"></jtrm>
+          <txxx :class="{ show: content[4] }"></txxx>
+          <xzgl :class="{ show: content[5] }"></xzgl>
+          <rlzy :class="{ show: content[6] }"></rlzy>
+          <whhd :class="{ show: content[7] }"></whhd>
+
           <div class="body-right-bottom">
-<div class="bot_Pic">
-  <img :src="hz1" class="hzPic">
-  <img :src="hz2" class="hzPic">
-  <img :src="hz3" class="hzPic">
-  <img :src="hz4" class="hzPic">
-  <img :src="hz5" class="hzPic">
-  <img :src="erweima" class="ewmPic">
-</div>
-<div class="bot_Zi">Copyright © 2018 Ningbo Hooya International Ltd. All rights reserved. 备案/许可证编号为:浙ICP备12003154 - 当前共[71]人在线 -</div>
+            <div class="bot_Pic">
+              <img :src="hz1" class="hzPic" />
+              <img :src="hz2" class="hzPic" />
+              <img :src="hz3" class="hzPic" />
+              <img :src="hz4" class="hzPic" />
+              <img :src="hz5" class="hzPic" />
+              <img :src="erweima" class="ewmPic" />
+            </div>
+            <div class="bot_Zi">
+              Copyright © 2018 Ningbo Hooya International Ltd. All rights
+              reserved. 备案/许可证编号为:浙ICP备12003154 - 当前共[71]人在线 -
+            </div>
           </div>
         </div>
       </div>
@@ -233,9 +258,19 @@
 </template>
 
 <script>
+// import func from '../../../vue-temp/vue-editor-bridge';
+import grzx from "../../components/grzx";
+import jtzd from "../../components/jtzd";
+import jtgg from "../../components/jtgg";
+import jtrm from "../../components/jtrm";
+import txxx from "../../components/txxx";
+import xzgl from "../../components/xzgl";
+import rlzy from "../../components/rlzy";
+import whhd from "../../components/whhd";
+const axios = require("axios");
 export default {
   name: "test",
-  components: {},
+  components: { grzx, jtzd, jtgg, jtrm, txxx, xzgl, rlzy, whhd },
   data() {
     return {
       logo: require("@/assets/image/logo.png"),
@@ -254,10 +289,11 @@ export default {
       erweima: require("@/assets/image/erweima.jpg"),
       departmentList: this.getDepartmentList(),
       tabList: this.getTabList(),
-      gonggaoList: this.getGongGao(),
+      gonggaoList: [],
       renmianshuList: this.getRenMianShu(),
       daibanList: this.getDaiBan(),
       daiban4List: this.getDaiBan4(),
+      daiban4_1List: "",
       wenzhangList: this.getWenZhang(),
       laba: require("@/assets/image/icon9.png"),
       jiantou: require("@/assets/image/jt1.png"),
@@ -269,6 +305,9 @@ export default {
       apm: "",
       weekDay: "",
       nowDate: "",
+      content:[],
+      conZhuYe:false,
+      currentIndex: "",
     };
   },
   methods: {
@@ -500,35 +539,64 @@ export default {
         },
       ];
     },
-    getWenZhang(){
-      return[{
-        title:"6张小月请假带待您审批",
-        neirong:"2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
-        time:"2018-5-20"
-      },
-      {
-        title:"6张小月请假带待您审批",
-        neirong:"2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
-        time:"2018-5-20"
-      },
-      {
-        title:"6张小月请假带待您审批",
-        neirong:"2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
-        time:"2018-5-20"
-      },
-      {
-        title:"6张小月请假带待您审批",
-        neirong:"2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
-        time:"2018-5-20"
-      },]
+    getWenZhang() {
+      return [
+        {
+          title: "6张小月请假带待您审批",
+          neirong:
+            "2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
+          time: "2018-5-20",
+        },
+        {
+          title: "6张小月请假带待您审批",
+          neirong:
+            "2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
+          time: "2018-5-20",
+        },
+        {
+          title: "6张小月请假带待您审批",
+          neirong:
+            "2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
+          time: "2018-5-20",
+        },
+        {
+          title: "6张小月请假带待您审批",
+          neirong:
+            "2月21日下午，宁波市口岸办张极星主任、陈利珍副主任、林维忠处长， 海曙商务局方卓毅局长、竹琰副局长一行来我司……",
+          time: "2018-5-20",
+        },
+      ];
     },
-    isAct(index){
-      if(index == 0) return true
-      else return false
-    }
+    isAct(index) {
+      if (index == 0) return true;
+      else return false;
+    },
+    select(index) {
+      this.conZhuYe = true;
+      for(var i=0; i<this.tabList.length; i++){
+        this.content[i] = true;
+      };
+      this.content[index] = false;
+      console.log(this.content);
+    },
   },
   mounted() {
     this.currentTime();
+    for(var i=0; i<this.tabList.length; i++){
+      this.content[i] = true;
+    };
+    // var that = this;
+    // axios.get("http://192.168.3.51:8701/getNewsList").then(function (response) {
+    //   that.gonggaoList = response.data.data;
+    //   // console.log(response.data);
+    // });
+
+    // axios
+    //   .get("http://192.168.3.51:8701/getNewsDetail?id=0")
+    //   .then(function (response) {
+    //     that.daiban4_1List = response.data.data;
+    //     // console.log(that.daiban4_1List);
+    //   });
   },
 };
 </script>
@@ -537,6 +605,9 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+.show {
+  display: none;
 }
 .head {
   width: 1400px;
@@ -611,6 +682,7 @@ export default {
       &-item {
         text-align: center;
         padding: 20px 0 20px 0;
+        cursor: pointer;
         &-img {
           transform: translate(0, 4px);
         }
@@ -665,7 +737,7 @@ export default {
 .body-right {
   background-color: whitesmoke;
   width: 1100px;
-  height: 900px;
+  // height: 900px;
   margin: 0 auto auto 20px;
   border-radius: 10px;
 }
@@ -739,7 +811,7 @@ ul {
 }
 .shijian {
   font-size: 10px;
-  margin-left: 110px;
+  margin-left: 200px;
 }
 .daibansj {
   font-size: 10px;
@@ -803,6 +875,15 @@ ul {
   color: #b81c22;
   margin: 5px 0px 5px 0px;
 }
+.xiangqing {
+  // white-space: nowrap;
+  // text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
 .wenzhang {
   color: #4c4948;
   font-size: 10px;
@@ -832,40 +913,39 @@ ul {
 .pic_demo .demo {
   margin: 0px 20px 0px 20px;
 }
-.biaoti5{
+.biaoti5 {
   color: #b81c22;
   margin: 10px;
 }
-.li-5{
+.li-5 {
   border-top: 1px solid;
   height: 110px;
 }
-.bor_botm{
-  border:none;
+.bor_botm {
+  border: none;
 }
-.body-right-bottom{
+.body-right-bottom {
   background-color: #aaaaaa;
   height: 120px;
-  width:1010px;
-  margin-left: 30px;
+  width: 1085px;
   margin-top: 20px;
   border-radius: 0 0 10px 10px;
 }
-.hzPic{
+.hzPic {
   width: 122px;
   height: 32px;
   border-right: 2px white solid;
 }
-.ewmPic{
+.ewmPic {
   width: 50px;
   height: 50px;
-  transform: translate(50px,5px);
+  transform: translate(50px, 5px);
 }
-.bot_Pic{
+.bot_Pic {
   text-align: center;
   padding-top: 10px;
 }
-.bot_Zi{
+.bot_Zi {
   text-align: center;
   font-size: 5px;
   margin-top: 15px;
