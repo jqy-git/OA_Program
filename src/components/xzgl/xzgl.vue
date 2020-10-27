@@ -1,6 +1,6 @@
 <template>
   <div class="whole">
-    <p>当前位置：集团制度</p>
+    <p>当前位置：<span style="cursor: pointer;">行政管理</span></p>
     <img :src="sqlc" />
     <div class="xiangqing">
       <img :src="bgyp" />

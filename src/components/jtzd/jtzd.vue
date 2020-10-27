@@ -1,6 +1,6 @@
 <template>
 <div>
-  <p>当前位置：集团制度</p>
+  <p>当前位置：<span style="cursor: pointer;">集团制度</span></p>
     <img :src="header">
     <input type="text">
     <button>搜索</button>

@@ -1,30 +1,36 @@
 <template>
-<div>
-  <p>当前位置：文化活动</p>
-    <img :src="header">
-    <input type="text">
-    <button>搜索</button>
-    <ul>
-        <li v-for="(item,index) in list" :key="index">
-            {{index+1}}
-            {{item.neirong}}
-            {{item.shijian}}
+  <div>
+    <div class="whole" v-show="show">
+      <p>当前位置：<span style="cursor: pointer">集团任免</span></p>
+      <img :src="header" />
+      <input type="text" />
+      <button>搜索</button>
+      <ul>
+        <li v-for="(item, index) in list" :key="index" @click="toRms">
+          {{ index + 1 }}
+          {{ item.neirong }}
+          {{ item.shijian }}
         </li>
-    </ul>
-</div>
+      </ul>
+    </div>
+    <router-view @toFu="getShow" />
+  </div>
 </template>
 
 <script>
+import rms from "./jtrm_rms";
 export default {
-    name:'jtzd',
-    data(){
-        return{
-            header: require("@/assets/image/header.jpg"),
-            list:this.getGongGao(),
-        }
-    },
-    methods:{
-        getGongGao() {
+  components: { rms },
+  name: "jtzd",
+  data() {
+    return {
+      header: require("@/assets/image/header.jpg"),
+      list: this.getGongGao(),
+      show: true,
+    };
+  },
+  methods: {
+    getGongGao() {
       return [
         {
           neirong: "8关于事项跟踪系统应用的培训通知2018",
@@ -56,40 +62,46 @@ export default {
         },
       ];
     },
-    }
-}
+    toRms() {
+      this.$router.push({ path: "/jtrm/rms" });
+      this.show = false;
+    },
+    getShow(val) {
+      this.show = val;
+    },
+  },
+};
 </script>
 
 <style scoped>
-div{
+.whole {
   background-color: white;
   padding-left: 120px;
   height: 850px;
   padding-top: 40px;
 }
-p{
+p {
   margin-bottom: 20px;
 }
-img{
-  transform: translate(0,9px);
+img {
+  transform: translate(0, 9px);
 }
-input{
+input {
   height: 25px;
   width: 237px;
 }
-button{
+button {
   height: 29px;
   width: 52px;
 }
-li{
+li {
   margin-top: 10px;
-
   line-height: 30px;
   color: #4c4948;
   font-size: 12px;
   width: 785px;
 }
-li:hover{
+li:hover {
   background-color: #666666;
   color: white;
   cursor: pointer;

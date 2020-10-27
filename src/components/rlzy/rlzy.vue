@@ -1,6 +1,6 @@
 <template>
   <div class="whole">
-    <p>当前位置：人力资源</p>
+    <p>当前位置：<span style="cursor: pointer;">人力资源</span></p>
     <img :src="wdkq" />
       <img :src="qjd" />
       <img :src="ccd" />

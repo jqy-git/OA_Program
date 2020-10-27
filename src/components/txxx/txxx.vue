@@ -1,7 +1,7 @@
 <template>
   <div class="whole">
     <div class="line_1">
-      <p>当前位置：通讯信息</p>
+      <p>当前位置：<span style="cursor: pointer;">通讯信息</span></p>
       <img :src="header" />
       <input type="text" />
       <button>搜索</button><br />
