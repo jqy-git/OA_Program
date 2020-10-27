@@ -65,11 +65,10 @@ div{
   background-color: white;
   padding-left: 120px;
   height: 850px;
-  /* border: 1px solid; */
+  padding-top: 40px;
 }
 p{
   margin-bottom: 20px;
-  margin-top: 40px;
 }
 img{
   transform: translate(0,9px);

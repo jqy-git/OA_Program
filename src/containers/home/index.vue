@@ -59,8 +59,9 @@
             v-for="(item, index) in tabList"
             :key="index"
           >
-            <div class="body-left-three-item" @click="select(index)">
-              <img :src="item.url" alt class="body-left-three-item-img" />
+            <!-- <div class="body-left-three-item" @click="select(index)" :class="{sel:content[index]}"> -->
+            <div class="body-left-three-item" @click="goto(index)" :class="{sel:content[index]}">
+              <img :src="content[index] ? item.url_red:item.url" class="body-left-three-item-img" />
               {{ item.name }}
             </div>
           </div>
@@ -92,7 +93,7 @@
 
         <div class="body-right">
           <div class="body-right-top">
-            <div class="body-right-1" :class="{ show: conZhuYe }">
+            <div class="body-right-1" v-show="conZhuYe">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -114,7 +115,7 @@
               </ul>
             </div>
 
-            <div class="body-right-2" :class="{ show: conZhuYe }">
+            <div class="body-right-2" v-show="conZhuYe">
               <ul>
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -132,7 +133,7 @@
               </ul>
             </div>
 
-            <div class="body-right-3" :class="{ show: conZhuYe }">
+            <div class="body-right-3" v-show="conZhuYe">
               <ul>
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -153,7 +154,7 @@
           </div>
 
           <div class="body-right-center">
-            <div class="body-right-4" :class="{ show: conZhuYe }">
+            <div class="body-right-4" v-show="conZhuYe">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -198,7 +199,7 @@
               </ul>
             </div>
 
-            <div class="body-right-5" :class="{ show: conZhuYe }">
+            <div class="body-right-5" v-show="conZhuYe">
               <ul style="padding: 0; margin: 0">
                 <li class="li-head">
                   <img :src="laba" class="laba" />
@@ -228,14 +229,16 @@
             </div>
           </div>
 
-          <grzx :class="{ show: content[0] }"></grzx>
-          <jtzd :class="{ show: content[1] }"></jtzd>
-          <jtgg :class="{ show: content[2] }"></jtgg>
-          <jtrm :class="{ show: content[3] }"></jtrm>
-          <txxx :class="{ show: content[4] }"></txxx>
-          <xzgl :class="{ show: content[5] }"></xzgl>
-          <rlzy :class="{ show: content[6] }"></rlzy>
-          <whhd :class="{ show: content[7] }"></whhd>
+          <router-view/>
+
+          <grzx v-show="content[0]"></grzx>
+          <jtzd v-show="content[1]"></jtzd>
+          <jtgg v-show="content[2]"></jtgg>
+          <jtrm v-show="content[3]"></jtrm>
+          <txxx v-show="content[4]"></txxx>
+          <xzgl v-show="content[5]"></xzgl>
+          <rlzy v-show="content[6]"></rlzy>
+          <whhd v-show="content[7]"></whhd>
 
           <div class="body-right-bottom">
             <div class="bot_Pic">
@@ -306,7 +309,7 @@ export default {
       weekDay: "",
       nowDate: "",
       content:[],
-      conZhuYe:false,
+      conZhuYe:true,
       currentIndex: "",
     };
   },
@@ -500,41 +503,49 @@ export default {
         {
           id: 1,
           url: require("@/assets/image/icon1.png"),
+          url_red: require("@/assets/image/icon_1.png"),
           name: "个人中心",
         },
         {
           id: 2,
           url: require("@/assets/image/icon2.png"),
+          url_red: require("@/assets/image/icon_2.png"),
           name: "集团制度",
         },
         {
           id: 3,
           url: require("@/assets/image/icon3.png"),
+          url_red: require("@/assets/image/icon_3.png"),
           name: "集团公告",
         },
         {
           id: 4,
           url: require("@/assets/image/icon4.png"),
+          url_red: require("@/assets/image/icon_4.png"),
           name: "集团任免",
         },
         {
           id: 5,
           url: require("@/assets/image/icon5.png"),
+          url_red: require("@/assets/image/icon_5.png"),
           name: "通讯信息",
         },
         {
           id: 6,
           url: require("@/assets/image/icon6.png"),
+          url_red: require("@/assets/image/icon_6.png"),
           name: "行政管理",
         },
         {
           id: 7,
           url: require("@/assets/image/icon7.png"),
+          url_red: require("@/assets/image/icon_7.png"),
           name: "人力资源",
         },
         {
           id: 8,
           url: require("@/assets/image/icon8.png"),
+          url_red: require("@/assets/image/icon_8.png"),
           name: "文化活动",
         },
       ];
@@ -572,18 +583,30 @@ export default {
       else return false;
     },
     select(index) {
-      this.conZhuYe = true;
+      var content = JSON.parse(JSON.stringify(this.content));
+      this.conZhuYe = false;
       for(var i=0; i<this.tabList.length; i++){
-        this.content[i] = true;
+        content[i] = false;
       };
-      this.content[index] = false;
-      console.log(this.content);
+      content[index] = true;
+      // console.log(content,"content")
+      this.content =content;
     },
+    goto(index){
+      if(index == 0) this.$router.push({path:"/myHome/grzx"});
+      if(index == 1) this.$router.push({path:"/myHome/jtzd"});
+      if(index == 2) this.$router.push({path:"/myHome/jtgg"});
+      if(index == 3) this.$router.push({path:"/myHome/jtrm"});
+      if(index == 4) this.$router.push({path:"/myHome/txxx"});
+      if(index == 5) this.$router.push({path:"/myHome/xzgl"});
+      if(index == 6) this.$router.push({path:"/myHome/rlzy"});
+      if(index == 7) this.$router.push({path:"/myHome/whhd"});
+    }
   },
   mounted() {
     this.currentTime();
     for(var i=0; i<this.tabList.length; i++){
-      this.content[i] = true;
+      this.content[i] = false;
     };
     // var that = this;
     // axios.get("http://192.168.3.51:8701/getNewsList").then(function (response) {
@@ -605,9 +628,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
-}
-.show {
-  display: none;
 }
 .head {
   width: 1400px;
@@ -745,7 +765,9 @@ export default {
 .body-right-center {
   display: flex;
 }
-
+.sel{
+  color: #b81c22;
+}
 .body-right-1 {
   margin: 40px 0px auto 30px;
   background-color: white;
