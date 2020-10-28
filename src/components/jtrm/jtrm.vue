@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="whole" v-show="show">
+    <div class="whole">
       <p>当前位置：<span style="cursor: pointer">集团任免</span></p>
       <img :src="header" />
       <input type="text" />
@@ -9,24 +9,20 @@
         <li v-for="(item, index) in list" :key="index" @click="toRms">
           {{ index + 1 }}
           {{ item.neirong }}
-          {{ item.shijian }}
+          <span style="float:right">{{ item.shijian }}</span>
         </li>
       </ul>
     </div>
-    <router-view @toFu="getShow" />
   </div>
 </template>
 
 <script>
-import rms from "./jtrm_rms";
 export default {
-  components: { rms },
   name: "jtzd",
   data() {
     return {
       header: require("@/assets/image/header.jpg"),
       list: this.getGongGao(),
-      show: true,
     };
   },
   methods: {
@@ -64,10 +60,6 @@ export default {
     },
     toRms() {
       this.$router.push({ path: "/jtrm/rms" });
-      this.show = false;
-    },
-    getShow(val) {
-      this.show = val;
     },
   },
 };

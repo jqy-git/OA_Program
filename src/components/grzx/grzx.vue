@@ -1,14 +1,13 @@
 <template>
   <div>
-    <div class="whole" v-show="show">
-      <p>当前位置：<span style="cursor: pointer">个人中心</span></p>
+    <div class="whole">
+      <p>当前位置：<span style="cursor: pointer"> 个人中心</span></p>
       <img :src="dbsy" @click="toDbsy" />
-      <img :src="ybsy" />
-      <img :src="bjsy" />
-      <img :src="lcsz" />
-      <img :src="lxfs" />
+      <img :src="ybsy" @click="toDbsy"/>
+      <img :src="bjsy" @click="toDbsy"/>
+      <img :src="lcsz" @click="toLcsz"/>
+      <img :src="lxfs" @click="toLxfs"/>
     </div>
-    <router-view @toFu="getShow" />
   </div>
 </template>
 
@@ -16,7 +15,7 @@
 export default {
   data() {
     return {
-      show:true,
+      show: true,
       dbsy: require("@/assets/image/grzx1.png"),
       ybsy: require("@/assets/image/grzx2.png"),
       bjsy: require("@/assets/image/grzx3.png"),
@@ -27,11 +26,13 @@ export default {
   methods: {
     toDbsy() {
       this.$router.push({ path: "/grzx/dbsy" });
-      this.show = false;
     },
-    getShow(val){
-      this.show = val;
-    }
+    toLcsz(){
+      this.$router.push({ path: "/grzx/lcsz" });
+    },
+    toLxfs(){
+      this.$router.push({ path: "/grzx/lxfs" });
+    },
   },
 };
 </script>

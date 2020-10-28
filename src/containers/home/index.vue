@@ -98,7 +98,7 @@
         </div>
 
         <div class="body-right">
-          <router-view />
+          <router-view/>
 
           <div class="body-right-bottom">
             <div class="bot_Pic">
@@ -122,10 +122,8 @@
 
 <script>
 const axios = require("axios");
-import grzx_dbsy from '../../components/grzx/grzx_dbsy'
 export default {
   name: "test",
-  components:{ grzx_dbsy },
   data() {
     return {
       logo: require("@/assets/image/logo.png"),

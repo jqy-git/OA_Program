@@ -18,7 +18,6 @@ export default {
   methods: {
     toJtrm() {
       this.$router.push({ path: "/jtrm" });
-      this.$emit('toFu', true);
     },
   },
 };

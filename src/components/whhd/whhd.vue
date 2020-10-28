@@ -8,7 +8,7 @@
         <li v-for="(item,index) in list" :key="index">
             {{index+1}}
             {{item.neirong}}
-            {{item.shijian}}
+            <span style="float:right">{{ item.shijian }}</span>
         </li>
     </ul>
 </div>

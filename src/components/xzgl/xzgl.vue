@@ -1,13 +1,13 @@
 <template>
   <div class="whole">
-    <p>当前位置：<span style="cursor: pointer;">行政管理</span></p>
+    <p>当前位置：<span style="cursor: pointer">行政管理</span></p>
     <img :src="sqlc" />
     <div class="xiangqing">
-      <img :src="bgyp" />
-      <img :src="gdzc" />
-      <img :src="kdsq" />
-      <img :src="clsy" />
-      <img :src="jpsq" />
+      <img :src="bgyp" @click="toBgyp" />
+      <img :src="gdzc" @click="toGdzc" />
+      <img :src="kdsq" @click="toKdsq" />
+      <img :src="clsy" @click="toClsy" />
+      <img :src="jpsq" @click="toJpsq" />
     </div>
   </div>
 </template>
@@ -24,6 +24,23 @@ export default {
       jpsq: require("@/assets/image/xzgl5.png"),
     };
   },
+  methods: {
+    toBgyp() {
+      this.$router.push({ path: "/xzgl/bgyp" });
+    },
+    toGdzc() {
+      this.$router.push({ path: "/xzgl/gdzc" });
+    },
+    toKdsq() {
+      this.$router.push({ path: "/xzgl/Kdsq" });
+    },
+    toClsy() {
+      this.$router.push({ path: "/xzgl/clsy" });
+    },
+    toJpsq() {
+      this.$router.push({ path: "/xzgl/jpsq" });
+    },
+  },
 };
 </script>
 
@@ -34,7 +51,7 @@ export default {
   height: 850px;
   padding-top: 40px;
 }
-.xiangqing img{
+.xiangqing img {
   margin: 30px 30px 0px 0px;
   cursor: pointer;
 }

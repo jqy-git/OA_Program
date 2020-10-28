@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="whole" v-show="show">
+    <div class="whole">
       <p>
         当前位置：
         <span style="cursor: pointer" @click="toGrzx"> 个人中心 /</span>
@@ -23,7 +23,7 @@
             请假开始事件
             <input type="text" />
           </td>
-          <td colspan="">
+          <td>
             请假结束事件
             <input type="text" />
           </td>
@@ -62,8 +62,8 @@
         </tr>
         <tr>
             <td colspan="4">
-                <img :src="yes" >
-                <img :src="no" >
+                <img :src="yes" style="cursor: pointer;">
+                <img :src="no" style="cursor: pointer;">
             </td>
         </tr>
       </table>
@@ -73,10 +73,8 @@
 
 <script>
 export default {
-  props: ["ren"],
   data() {
     return {
-      show: true,
       list: this.getList(),
       yes: require("@/assets/image/yes.jpg"),
       no: require("@/assets/image/no.jpg"),
@@ -113,10 +111,9 @@ export default {
     },
     toDbsy(){
       this.$router.push({ path: "/grzx/dbsy" });
-      this.$emit("toFu", true);
     },
     toGrzx(){
-      this.$emit("toGrzx");
+      this.$router.push({ path: "/grzx" });
     }
   },
 };

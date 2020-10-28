@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="whole" v-show="show">
+    <div class="whole">
       <p>
         当前位置：
         <span style="cursor: pointer" @click="toGrzx">个人中心 /</span>
@@ -31,7 +31,6 @@
         </tr>
       </table>
     </div>
-    <router-view @toFu="getShow" @toGrzx="toGrzx" :ren="ren" />
   </div>
 </template>
 
@@ -41,7 +40,6 @@ export default {
     return {
       show: true,
       list: this.getList(),
-      ren: "",
       header: require("@/assets/image/dbsy_header.jpg"),
     };
   },
@@ -76,15 +74,9 @@ export default {
     },
     toGrzx() {
       this.$router.push({ path: "/grzx" });
-      this.$emit("toFu", true);
     },
     toXiangQing(index) {
       this.$router.push({ path: "/grzx/dbsy/xq" });
-      this.show = false;
-      this.ren = index;
-    },
-    getShow(val) {
-      this.show = val;
     },
   },
 };
